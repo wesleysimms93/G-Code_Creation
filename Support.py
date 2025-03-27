@@ -55,9 +55,6 @@ class line_graph:
                         self.edges[unique_numb] = Point.calculate_distance(point, point2)
 
     def Snake_Sailes_Men(self):
-        start_point = Point(0, 0, 0, -1)
-        self.points.insert(0, start_point)
-        self.create_edges()
         Flip = False
         left_points = {}
         snake_path = []
@@ -67,48 +64,53 @@ class line_graph:
         for i in range(self.x_range[0] -1 ,self.x_range[1] + 1):
             if Flip:
                 for j in range(self.y_range[0] - 1,self.y_range[1] + 1):
-                    val = left_points.pop((i,j),-1)
-                    if val != -1:
+                 
+                    val = left_points.pop((i,j),None)
+                    if val != None:
+                        
                         snake_path.append(val)
                         if len(left_points) == 0:
-                            self.points.pop(0)
+                            #self.points.pop(0)
                             return True, snake_path
                 Flip = False
             else:
                 for j in reversed(range(self.y_range[0] - 1,self.y_range[1]+ 1)):
-                    val = left_points.pop((i,j),-1)
-                    if val != -1:
+                    val = left_points.pop((i,j),None)
+                    if val != None:
                         snake_path.append(val)
                         print((left_points))
                         if len(left_points) == 0:
-                            self.points.pop(0)
+                            #self.points.pop(0)
                             return True, snake_path
                 Flip = True
-        self.points.pop(0)
+        #self.points.pop(0)
         print(f"The following was left behind:{left_points}")
         return False, []
     
 
 
     def Sorting_Salesmen(self):
-        start_point = Point(0, 0, 0, -1)
-        self.points.insert(0, start_point)
+        #start_point = Point(0, 0, 0, -1)
+        #self.points.insert(0, start_point)
         self.create_edges()
         unique_points = []
         unique_points_dict_name = {}
         for points in self.points:
             point_un = unique_number(points.x,points.y)
+            #print(point_un)
             unique_points.append(point_un)
             unique_points_dict_name[point_un] = points.name
+        #print(unique_points)
         unique_points = sorted(unique_points)
         output = []
+        #print(unique_points)
         for point_numb in unique_points:
             try:
                 output.append(unique_points_dict_name[point_numb])
             except:
-                self.points.pop(0)
+                #self.points.pop(0)
                 return False , []
-        self.points.pop(0)
+        #self.points.pop(0)
         return True , output
 
 
@@ -161,9 +163,7 @@ class line_graph:
 
     def shortest_path(self):
         # Add the starting point (0, 0, 0)
-        start_point = Point(0, 0, 0, -1)
-        self.points.insert(0, start_point)
-        self.create_edges()
+        
         # Generate permutations excluding the starting point
         point_names = [point.name for point in self.points if point.name != -1]
         permutations = self.generate_permutations(point_names)
@@ -186,9 +186,9 @@ class line_graph:
                 shortest_path = perm
 
         # Remove the starting point from the list to keep data consistent
-        self.points.pop(0)
+       
 
-        return shortest_path, shortest_distance
+        return True, shortest_path
 
 
 

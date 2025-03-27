@@ -20,7 +20,7 @@ N = 4  # Number of points
 X_range = (1, 24)  # Range for X values
 Y_range = (1, 14)    # Range for Y values
 Z_range = (1, 14)    # Range for Z values
-file_name = '4_points.txt'  # Output file name
+file_name = f'{N}_points.txt'  # Output file name
 
 # Generate and save the points
 generate_points(N, X_range, Y_range, Z_range, file_name)

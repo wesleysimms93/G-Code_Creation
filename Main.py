@@ -19,7 +19,8 @@ for line in file:
     New_Point = Support.Point(values[0],values[1],values[2],char)
     graph.append_point(New_Point)
     char += 1
-
+graph.append_point(Support.Point(0,0,0,-1))
+graph.create_edges()
 
 print(f"There are :{len(graph.edges)} edges in the graph")
 print(f"The max y is:{graph.y_range[1]}, The min y is:{graph.y_range[0]} ")

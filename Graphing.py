@@ -32,11 +32,12 @@ def visualize_graph(graph, path, graph_edges = False):
     plt.ylabel("Y-axis")
     plt.grid(True)
     plt.legend()
-    plt.show()
+    plt.draw()
+
 
 # Example usage
 graph = line_graph()
-file = open("./100_points.txt", 'r')
+file = open("./10_points.txt", 'r')
 char = 1
 for line in file:
     #print(line)
@@ -50,4 +51,14 @@ for line in file:
 graph.append_point(Point(0,0,0,-1))
 graph.create_edges()
 
-visualize_graph(graph,[])
+bool_result , Result_list = graph.shortest_path()
+print(Result_list)
+visualize_graph(graph,Result_list)
+
+bool_result , Result_list = graph.Snake_Sailes_Men()
+visualize_graph(graph,Result_list)
+
+bool_result , Result_list = graph.Sorting_Salesmen()
+visualize_graph(graph,Result_list)
+
+plt.show()
