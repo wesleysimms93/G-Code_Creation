@@ -1,0 +1,29 @@
+ def Solve_The_Problem(self):
+        shortest_path = None
+        shortest_distance = float('inf')
+        def permute(current, remaining, shortest_path, shortest_distance):
+            if not remaining:
+                #print(current)
+                perm = [-1] + current
+                distance = 0
+                for i in range(len(perm) - 1):
+                    unique_numb = unique_number(perm[i], perm[i + 1])
+                    distance += self.edges.get(unique_numb, float('inf'))
+                if distance < shortest_distance:
+                    shortest_distance = distance
+                    shortest_path = perm    
+                    #print("I Found the Short Path")
+                return
+            for i in range(len(remaining)):
+                permute(current + [remaining[i]], remaining[:i] + remaining[i + 1:], shortest_path ,shortest_distance)
+
+        # Add the starting point (0, 0, 0)
+        start_point = Point(0, 0, 0, -1)
+        point_names = [ point.name for point in self.points]
+        end = []
+        self.points.insert(0, start_point)
+        self.create_edges()
+        # Generate permutations excluding the starting point
+        permutations = permute([], point_names, end, shortest_path ,shortest_distance)
+        # Check each permutation
+        # Add the starting point to the permutation
