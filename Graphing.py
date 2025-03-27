@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from Support import line_graph, Point
 
 
-def visualize_graph(graph, path):
+def visualize_graph(graph, path, graph_edges = False):
     # Create a plot
     plt.figure(figsize=(10, 10))
 
@@ -10,13 +10,13 @@ def visualize_graph(graph, path):
     for point in graph.points:
         plt.scatter(point.x, point.y, label=f"Point {point.name}")
         plt.text(point.x, point.y, f"{point.name}", fontsize=9, ha='right')
-
+    if graph_edges:
     # Plot edges
-    for (key, distance) in graph.edges.items():
-        # Extract points from unique key
-        point1_name, point2_name = divmod(key, 10000)
-        point1 = next(p for p in graph.points if p.name == point1_name)
-        point2 = next(p for p in graph.points if p.name == point2_name)
+        for (key, distance) in graph.edges.items():
+            # Extract points from unique key
+            point1_name, point2_name = divmod(key, 10000)
+            point1 = next(p for p in graph.points if p.name == point1_name)
+            point2 = next(p for p in graph.points if p.name == point2_name)
 
         plt.plot([point1.x, point2.x], [point1.y, point2.y], 'b--')  # Dashed blue lines for edges
     for i in range(len(path) - 1):
@@ -50,4 +50,4 @@ for line in file:
 graph.append_point(Point(0,0,0,-1))
 graph.create_edges()
 
-visualize_graph(graph)
+visualize_graph(graph,[])
