@@ -29,10 +29,20 @@ class line_graph:
     def __init__(self):
         self.points = []
         self.edges = {}
+        self.x_range = [7924, 1]  # Range for X values
+        self.y_range = [1524, 1]    # Range for Y values
         #self.points.append(Point(0,0,0,1))
 
     def append_point(self, point):
         self.points.append(point)
+        if self.y_range[0] > point.y:
+            self.y_range[0] = point.y
+        elif self.y_range[1] < point.y:
+            self.y_range[1] = point.y
+        if self.x_range[0] > point.x:
+            self.x_range[0] = point.x 
+        elif self.x_range[1] < point.x:
+            self.x_range[1] = point.x
         return
     
     def create_edges(self):
@@ -41,8 +51,56 @@ class line_graph:
                 if(point2.name != point.name):
                     unique_numb = unique_number(point2.name , point.name)
                     if (self.edges.get(unique_numb, -1) == -1):
-                        print("Distance Does not exist!")
+                        #print("Distance Does not exist!")
                         self.edges[unique_numb] = Point.calculate_distance(point, point2)
+
+    def Snake_Sailes_Men(self):
+        Flip = False
+        left_points = {}
+        snake_path = []
+        snake_distance = -1 
+        for points in self.points:
+            left_points[(points.x,points.y)] = points.name
+        for i in range(self.x_range[0] -1 ,self.x_range[1] + 1):
+            if Flip:
+                for j in range(self.y_range[0] - 1,self.y_range[1] + 1):
+                    val = left_points.pop((i,j),-1)
+                    if val != -1:
+                        snake_path.append(val)
+                        if len(left_points) == 0:
+                            return True, snake_path
+                Flip = False
+            else:
+                for j in reversed(range(self.y_range[0] - 1,self.y_range[1]+ 1)):
+                    val = left_points.pop((i,j),-1)
+                    if val != -1:
+                        snake_path.append(val)
+                        print((left_points))
+                        if len(left_points) == 0:
+                            return True, snake_path
+                Flip = True
+        return False, []
+    
+
+    
+    def Sorting_Salesmen(self):
+        unique_points = []
+        unique_points_dict_name = {}
+        for points in self.points:
+            point_un = unique_number(points.x,points.y)
+            unique_points.append(point_un)
+            unique_points_dict_name[point_un] = points.name
+        unique_points = sorted(unique_points)
+        output = []
+        for point_numb in unique_points:
+            try:
+                output.append(unique_points_dict_name[point_numb])
+            except:
+                return False , []
+        return True , output
+
+
+        
 
     def Solve_The_Problem(self):
         shortest_path = None
