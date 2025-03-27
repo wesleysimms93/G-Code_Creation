@@ -20,7 +20,7 @@ for line in file:
     graph.append_point(New_Point)
     char += 1
 timestart = time.datetime.now()
-print(f"The Shotest path: {graph.Solve_The_Problem()}")
+print(f"The Shotest path: {graph.shortest_path()}")
 print(graph.edges)
 print(f"There are :{len(graph.edges)} edges in the graph")
 timeend = time.datetime.now()    

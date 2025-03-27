@@ -21,7 +21,7 @@ class Point:
 
     def calculate_distance(point1, point2):
     # Calculate the Euclidean distance between two points
-        distance = math.sqrt((point2.x - point1.x)**2 + (point2.y - point1.y)**2 + (point2.z - point1.z)**2)
+        distance = math.sqrt((point2.x - point1.x)**2 + (point2.y - point1.y)**2)
         return distance
 
 
@@ -80,7 +80,7 @@ class line_graph:
         def permute(current, remaining, result):
             if not remaining:
                 result.append(current)
-                print(current)
+                #print(current)
                 return
             for i in range(len(remaining)):
                 permute(current + [remaining[i]], remaining[:i] + remaining[i + 1:], result)
@@ -111,9 +111,9 @@ class line_graph:
                 distance += self.edges.get(unique_numb, float('inf'))
 
         # Update if this path is shorter
-        if distance < shortest_distance:
-            shortest_distance = distance
-            shortest_path = perm
+            if distance < shortest_distance:
+                shortest_distance = distance
+                shortest_path = perm
 
         # Remove the starting point from the list to keep data consistent
         self.points.pop(0)
