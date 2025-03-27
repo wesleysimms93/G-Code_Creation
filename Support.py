@@ -29,19 +29,19 @@ class line_graph:
     def __init__(self):
         self.points = []
         self.edges = {}
-        self.x_range = [7924, 1]  # Range for X values
-        self.y_range = [1524, 1]    # Range for Y values
+        self.x_range = [0, 1]  # Range for X values
+        self.y_range = [0, 1]    # Range for Y values
         #self.points.append(Point(0,0,0,1))
 
     def append_point(self, point):
         self.points.append(point)
         if self.y_range[0] > point.y:
             self.y_range[0] = point.y
-        elif self.y_range[1] < point.y:
+        if self.y_range[1] < point.y:
             self.y_range[1] = point.y
         if self.x_range[0] > point.x:
             self.x_range[0] = point.x 
-        elif self.x_range[1] < point.x:
+        if self.x_range[1] < point.x:
             self.x_range[1] = point.x
         return
     
@@ -55,6 +55,9 @@ class line_graph:
                         self.edges[unique_numb] = Point.calculate_distance(point, point2)
 
     def Snake_Sailes_Men(self):
+        start_point = Point(0, 0, 0, -1)
+        self.points.insert(0, start_point)
+        self.create_edges()
         Flip = False
         left_points = {}
         snake_path = []
@@ -68,6 +71,7 @@ class line_graph:
                     if val != -1:
                         snake_path.append(val)
                         if len(left_points) == 0:
+                            self.points.pop(0)
                             return True, snake_path
                 Flip = False
             else:
@@ -77,13 +81,19 @@ class line_graph:
                         snake_path.append(val)
                         print((left_points))
                         if len(left_points) == 0:
+                            self.points.pop(0)
                             return True, snake_path
                 Flip = True
+        self.points.pop(0)
+        print(f"The following was left behind:{left_points}")
         return False, []
     
 
-    
+
     def Sorting_Salesmen(self):
+        start_point = Point(0, 0, 0, -1)
+        self.points.insert(0, start_point)
+        self.create_edges()
         unique_points = []
         unique_points_dict_name = {}
         for points in self.points:
@@ -96,7 +106,9 @@ class line_graph:
             try:
                 output.append(unique_points_dict_name[point_numb])
             except:
+                self.points.pop(0)
                 return False , []
+        self.points.pop(0)
         return True , output
 
 
