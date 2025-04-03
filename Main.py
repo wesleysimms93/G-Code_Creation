@@ -26,22 +26,43 @@ print(f"There are :{len(graph.edges)} edges in the graph")
 print(f"The max y is:{graph.y_range[1]}, The min y is:{graph.y_range[0]} ")
 print(f"The max x is:{graph.x_range[1]} The min x is:{graph.x_range[0]}")
 timestart = time.datetime.now()
-print(f"The Shotest path Brute Salesmen: {graph.shortest_path()}")
+# print(f"The Shotest path Brute Salesmen: {graph.shortest_path()}")
+# #print(graph.edges)
+# timeend = time.datetime.now()    
+# print(timeend-timestart)
+
+timestart = time.datetime.now()
+dist , Result_list = graph.Snake_Sailes_Men()
+print(f"The Shotest path Snake Salesmen: {dist}")
 #print(graph.edges)
 timeend = time.datetime.now()    
 print(timeend-timestart)
 
 timestart = time.datetime.now()
-print(f"The Shotest path Snake Salesmen: {graph.Snake_Sailes_Men()}")
+dist2 , Result_list2 = graph.Drunk_Snake_Sailes_Men()
+print(f"The Shotest path drunk Snake Salesmen: {dist2}")
 #print(graph.edges)
-timeend = time.datetime.now()    
-print(timeend-timestart)
+timeend = time.datetime.now()  
+if dist2 < dist:
+    dist = dist2
+    Result_list = Result_list2
+
 
 timestart = time.datetime.now()
-print(f"The Shotest path Sorting Salesmen: {graph.Sorting_Salesmen()}")
+dist3 , Result_list3 = graph.Sorting_Salesmen()
+print(f"The Shotest path Sorting Salesmen: {dist3}")
 #print(graph.edges)
 timeend = time.datetime.now()  
 
-print(timeend-timestart)
+if dist3 < dist:
+    dist = dist3
+    Result_list = Result_list3
 
+
+print(timeend-timestart)
+with open("file.txt", "w") as f:
+    for element in Result_list:
+        
+
+f = open("file.txt","r")
 

@@ -36,6 +36,17 @@ class line_graph:
         self.y_range = [0, 1]    # Range for Y values
         #self.points.append(Point(0,0,0,1))
 
+    def get_point(self, point_name):
+        for point in self.points:
+            if point.name == point_name:
+                return point
+            
+    def get_point_remove(self, point_name):
+        for point in self.points:
+            if point.name == point_name:
+                self.points.remove(point)
+                return point
+
     def append_point(self, point):
         self.points.append(point)
         if self.y_range[0] > point.y:
