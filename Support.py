@@ -22,6 +22,9 @@ class Point:
         self.z = int(z)
         self.name = int(name)
 
+    def __str__(self):
+        return str(self.name)
+
     def calculate_distance(point1, point2):
     # Calculate the Euclidean distance between two points
         distance = math.sqrt((point2.x - point1.x)**2 + (point2.y - point1.y)**2)
@@ -130,7 +133,7 @@ class line_graph:
                             for i in range(len(snake_path) - 1):
                                     unique_numb = unique_number(snake_path[i], snake_path[i + 1])
                                     distance += self.edges.get(unique_numb, float('inf'))
-                            return distance, snake_path
+                            return distance, reversed(snake_path)
                 Flip = False
             else:
                 for j in reversed(range(self.y_range[0] - 1,self.y_range[1]+ 1)):
@@ -144,7 +147,7 @@ class line_graph:
                             for i in range(len(snake_path) - 1):
                                     unique_numb = unique_number(snake_path[i], snake_path[i + 1])
                                     distance += self.edges.get(unique_numb, float('inf'))
-                            return distance, snake_path
+                            return distance, reversed(snake_path)
                 Flip = True
         #self.points.pop(0)
         print(f"The following was left behind:{left_points}")

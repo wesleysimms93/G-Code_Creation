@@ -49,6 +49,8 @@ for line in file:
     char += 1
 graph.append_point(Point(0,0,0,-1))
 graph.create_edges()
+
+
 visualize_graph(graph,[], -1,"Graph" , True)
 dist , Result_list = graph.shortest_path()
 visualize_graph(graph,Result_list, dist, "Brute")

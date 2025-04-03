@@ -4,7 +4,7 @@ import Support
 import numpy as np
 
 
-file = open("./4_points.txt", 'r')
+file = open("./100_points.txt", 'r')
 
 char = 1
 
@@ -25,6 +25,7 @@ graph.create_edges()
 print(f"There are :{len(graph.edges)} edges in the graph")
 print(f"The max y is:{graph.y_range[1]}, The min y is:{graph.y_range[0]} ")
 print(f"The max x is:{graph.x_range[1]} The min x is:{graph.x_range[0]}")
+
 timestart = time.datetime.now()
 # print(f"The Shotest path Brute Salesmen: {graph.shortest_path()}")
 # #print(graph.edges)
@@ -35,6 +36,7 @@ timestart = time.datetime.now()
 dist , Result_list = graph.Snake_Sailes_Men()
 print(f"The Shotest path Snake Salesmen: {dist}")
 #print(graph.edges)
+print("Using Snake")
 timeend = time.datetime.now()    
 print(timeend-timestart)
 
@@ -46,6 +48,7 @@ timeend = time.datetime.now()
 if dist2 < dist:
     dist = dist2
     Result_list = Result_list2
+    print("Using Drunk Snake")
 
 
 timestart = time.datetime.now()
@@ -57,12 +60,14 @@ timeend = time.datetime.now()
 if dist3 < dist:
     dist = dist3
     Result_list = Result_list3
+    print("Using Sort")
 
 
 print(timeend-timestart)
 with open("file.txt", "w") as f:
     for element in Result_list:
-        
+        point = graph.get_point_remove(element)
+        f.write(f"5M X{point.x} Y{point.y} Z{point.z}\n")
+print("Write Complete")
 
-f = open("file.txt","r")
 
