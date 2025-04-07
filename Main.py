@@ -4,7 +4,7 @@ import Support
 import numpy as np
 
 
-file = open("./100_points.txt", 'r')
+file = open("./10_points.txt", 'r')
 
 char = 1
 
@@ -19,6 +19,8 @@ for line in file:
     New_Point = Support.Point(values[0],values[1],values[2],char)
     graph.append_point(New_Point)
     char += 1
+
+file.close()
 graph.append_point(Support.Point(0,0,0,-1))
 graph.create_edges()
 
@@ -64,7 +66,7 @@ if dist3 < dist:
 
 
 print(timeend-timestart)
-with open("file.txt", "w") as f:
+with open("gcodetest.txt", "w") as f:
     for element in Result_list:
         point = graph.get_point_remove(element)
         f.write(f"5M X{point.x} Y{point.y} Z{point.z}\n")
