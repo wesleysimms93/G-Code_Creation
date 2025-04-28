@@ -4,7 +4,7 @@ import Support
 import numpy as np
 
 
-file = open("./10_points.txt", 'r')
+file = open("./100_points.txt", 'r')
 
 char = 1
 
@@ -69,7 +69,7 @@ print(timeend-timestart)
 with open("gcodetest.txt", "w") as f:
     for element in Result_list:
         point = graph.get_point_remove(element)
-        f.write(f"5M X{point.x} Y{point.y} Z{point.z}\n")
+        f.write(f"M10 X{point.x} Y{point.y} Z{point.z}\n")
 print("Write Complete")
 
 
