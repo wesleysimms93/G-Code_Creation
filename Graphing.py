@@ -35,7 +35,7 @@ def visualize_graph(graph, path, total_distance, Title="Graph", graph_edges=Fals
     plt.ylabel("Y-axis")
     plt.grid(True)
     plt.legend()
-    plt.show()
+    #plt.show()
 
 
 # Example usage
